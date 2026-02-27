@@ -1,0 +1,66 @@
+1)Write a SQL statement to display specific columns movie and genre for all the movies
+Answer=
+SELECT mname, genre
+FROM movie;
+
+2)Write a query which will retrieve the information of all actors who has ‘khan’ in their name
+Answer=
+SELECT *
+FROM actor
+WHERE name LIKE '%khan%';
+
+3)Write a SQL statement to display all the information for those movies which were released in 20th century
+(20th century → before year 2000)
+Answer=
+SELECT *
+FROM movie
+WHERE release_date < '2000-01-01';
+
+4)Write a SQL statement to find the average rating for movies
+Answer=
+SELECT AVG(IMDB_rating) AS average_rating
+FROM movie;
+
+5)Write a SQL query to arrange the actors in ascending order of their award count
+Answer=
+SELECT *
+FROM actor
+ORDER BY no_of_awards ASC;
+
+6)Write a SQL statement to find the number of movies in which each actor has worked
+Answer=
+SELECT a.name, COUNT(c.m_id) AS number_of_movies
+FROM actor a
+JOIN casting c ON a.act_id = c.a_id
+GROUP BY a.name;
+
+7)Write a query to find names of the actor along with the movie name they have worked in
+Answer=
+SELECT a.name AS actor_name, m.mname AS movie_name
+FROM actor a
+JOIN casting c ON a.act_id = c.a_id
+JOIN movie m ON c.m_id = m.m_id;
+
+8)Write a SQL statement to name of the movie in which a non Indian actor has worked
+Answer=
+SELECT DISTINCT m.mname
+FROM movie m
+JOIN casting c ON m.m_id = c.m_id
+JOIN actor a ON c.a_id = a.act_id
+WHERE a.nationality <> 'Indian';
+
+9)Write a query to display names of all movies in which ‘Salman khan’ has worked
+Answer=
+SELECT m.mname
+FROM movie m
+JOIN casting c ON m.m_id = c.m_id
+JOIN actor a ON c.a_id = a.act_id
+WHERE a.name = 'Salman Khan';
+
+10)Write a query to find names of actors who worked in movie with genre ‘comedy’
+Answer=
+SELECT DISTINCT a.name
+FROM actor a
+JOIN casting c ON a.act_id = c.a_id
+JOIN movie m ON c.m_id = m.m_id
+WHERE m.genre = 'comedy';
